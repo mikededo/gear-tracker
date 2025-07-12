@@ -4,6 +4,9 @@
     import type { LayoutData } from './$types';
     import '../app.css';
 
+    import { QueryClientProvider } from '@tanstack/svelte-query';
+    import { SvelteQueryDevtools } from '@tanstack/svelte-query-devtools';
+
     import { initThemeContext } from '$lib/context/theme.svelte';
 
     type Props = {
@@ -15,4 +18,7 @@
     initThemeContext(data.theme);
 </script>
 
-{@render children()}
+<QueryClientProvider client={data.queryClient}>
+    {@render children()}
+    <SvelteQueryDevtools />
+</QueryClientProvider>
