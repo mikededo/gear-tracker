@@ -5,6 +5,7 @@ import { redirect } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public';
+import { ROUTES } from '$lib/constants';
 import { getThemeCookie, THEME_COOKIE } from '$lib/context/theme.svelte';
 import { paraglideMiddleware } from '$lib/i18n/server';
 
@@ -62,12 +63,12 @@ const authGuard: Handle = async ({ event, resolve }) => {
   event.locals.session = session;
   event.locals.user = user;
 
-  if (!event.locals.session && event.url.pathname.startsWith('/private')) {
-    redirect(303, '/auth');
+  if (!event.locals.session && event.url.pathname !== ROUTES.landing) {
+    redirect(303, ROUTES.auth.signIn);
   }
 
-  if (event.locals.session && event.url.pathname === '/auth') {
-    redirect(303, '/private');
+  if (event.locals.session && event.url.pathname.startsWith(ROUTES.auth.base)) {
+    redirect(303, ROUTES.dashboard);
   }
 
   return resolve(event);

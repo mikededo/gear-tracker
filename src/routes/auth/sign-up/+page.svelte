@@ -1,5 +1,6 @@
 <script lang="ts">
     import { AuthForm } from '$lib/components';
+    import { ROUTES } from '$lib/constants';
     import { m } from '$lib/i18n/messages';
     import {
         Button,
@@ -13,7 +14,7 @@
 <section class="flex flex-col gap-6">
     <Card class="overflow-hidden p-0">
         <CardContent class="grid p-0 md:grid-cols-2">
-            <AuthForm class="p-6 md:p-8" action="/auth?/sign-up">
+            <AuthForm class="p-6 md:p-8" action={ROUTES.auth.signUp}>
                 <div class="flex flex-col gap-6">
                     <div class="flex flex-col items-center gap-2 text-center">
                         <h1 class="text-2xl font-bold">{m.auth_sign_up_title()}</h1>
@@ -65,7 +66,7 @@
                         />
                     </div>
 
-                    <Button class="w-full" type="submit">Sign in</Button>
+                    <Button class="w-full" type="submit">{m.sign_in()}</Button>
                     <div class="text-center text-sm">
                         {m.auth_sign_up_go_to_sign_in()}
                         <a class="underline underline-offset-4" href="/auth/sign-in"> {m.sign_in()}</a>
