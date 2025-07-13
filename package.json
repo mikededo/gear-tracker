@@ -8,7 +8,7 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "dev": "vite dev",
-    "gen:db-schemas": "bun scripts/data-schemas.ts && eslint ./src/lib/database/schema.g.ts --fix --quiet",
+    "gen:db-schemas": "bun scripts/schemas.ts && eslint ./src/lib/database/schema.g.ts --fix --quiet",
     "gen:db-types": "bun supabase gen types --lang typescript --local > ./src/lib/database/types.g.ts && eslint --fix ./src/lib/database/types.g.ts",
     "gen:i18n": "bunx @inlang/paraglide-js compile --project './inlang' --outdir './src/lib/i18n'",
     "lint": "eslint .",
