@@ -5,15 +5,14 @@
     import {
         Button,
         Card,
-        CardContent,
         Input,
         Label
     } from '$lib/ui';
 </script>
 
 <div class="flex flex-col gap-6">
-    <Card class="overflow-hidden p-0">
-        <CardContent class="grid p-0 md:grid-cols-2">
+    <Card.Root class="overflow-hidden p-0">
+        <Card.Content class="grid p-0 md:grid-cols-2">
             <AuthForm class="p-6 md:p-8" action={ROUTES.actions.authSignIn}>
                 <div class="flex flex-col gap-6">
                     <div class="flex w-full flex-col items-center gap-2 text-center">
@@ -66,8 +65,8 @@
                     src="/placeholder.svg"
                 />
             </div>
-        </CardContent>
-    </Card>
+        </Card.Content>
+    </Card.Root>
 
     <div
         class="text-center text-xs text-balance text-muted-foreground *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary"

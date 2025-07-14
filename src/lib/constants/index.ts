@@ -13,3 +13,7 @@ export const ROUTES = {
   landing: '/'
 };
 
+export const QUERY_KEYS = {
+  dashboard: ['dashboard']
+};
+

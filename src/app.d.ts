@@ -3,6 +3,8 @@ import type { QueryClient } from '@tanstack/svelte-query';
 
 import type { Client } from '$lib/database/types';
 
+export default CurrencyDollar;
+
 declare global {
   namespace App {
     interface Locals {
@@ -16,9 +18,9 @@ declare global {
       session: null | Session;
     }
 
-    // interface Error {}
-    // interface PageState {}
-    // interface Platform {}
+  // interface Error {}
+  // interface PageState {}
+  // interface Platform {}
   }
 }
 
