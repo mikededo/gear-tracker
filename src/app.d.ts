@@ -1,14 +1,9 @@
-import type { Icon as IconType } from '@lucide/svelte';
 import type { Session, User } from '@supabase/supabase-js';
 import type { QueryClient } from '@tanstack/svelte-query';
-import type { ComponentProps } from 'svelte';
 
 import type { Client } from '$lib/database/types';
 
 declare global {
-  type LucideIcon = typeof IconType;
-  type LucideIconProps = { class?: string } & ComponentProps<LucideIcon>;
-
   namespace App {
     interface Locals {
       queryClient: QueryClient;
