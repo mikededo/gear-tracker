@@ -1,8 +1,9 @@
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 
 import { fail, redirect } from '@sveltejs/kit';
 import * as v from 'valibot';
 
+import { ROUTES } from '$lib/constants';
 import { m } from '$lib/i18n/messages';
 
 const PASSWORD_REGEX = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}/;
@@ -36,8 +37,10 @@ const SignUpInput = v.object({
   password: PasswordInput
 });
 
-export const load = () => {
-  throw redirect(301, '/auth/sign-in');
+export const load: PageServerLoad = ({ url }) => {
+  if (url.pathname === ROUTES.auth.base) {
+    throw redirect(301, '/auth/sign-in');
+  }
 };
 
 // On failing, we return only the first issue
@@ -53,7 +56,7 @@ export const actions: Actions = {
       return fail(404, { error: error.message });
     }
 
-    redirect(303, '/');
+    redirect(303, ROUTES.dashboard);
   },
   'sign-up': async ({ locals: { supabase }, request }) => {
     const formData = v.safeParse(SignUpInput, Object.fromEntries(await request.formData()));
@@ -72,7 +75,7 @@ export const actions: Actions = {
       return fail(404, { error: error.message });
     }
 
-    redirect(303, '/');
+    redirect(303, ROUTES.dashboard);
   }
 };
 

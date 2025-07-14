@@ -63,7 +63,7 @@ const authGuard: Handle = async ({ event, resolve }) => {
   event.locals.session = session;
   event.locals.user = user;
 
-  if (!session && event.url.pathname !== ROUTES.landing) {
+  if (!session && event.url.pathname.startsWith(ROUTES.dashboard)) {
     redirect(303, ROUTES.auth.signIn);
   }
 
