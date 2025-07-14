@@ -1,7 +1,12 @@
 
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "close": "Close",
+  "closet": "Closet",
+  "dashboard": "Dashboard",
   "sign_in": "Sign in",
-  "sign_up": "Sign up"
+  "sign_up": "Sign up",
+  "sports": "Sports",
+  "toggle_sidebar": "Toggle sidebar"
 }
 

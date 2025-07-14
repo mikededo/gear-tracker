@@ -3,6 +3,7 @@
 
     import type { WithElementRef } from '$lib/utils';
 
+    import { m } from '$lib/i18n/messages';
     import { cn } from '$lib/utils';
 
     import { useSidebar } from './context.svelte';
@@ -17,7 +18,6 @@
     const sidebar = useSidebar();
 </script>
 
-<!-- FIXME: Add i18n  -->
 <button
     class={cn(
         'hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear after:absolute after:inset-y-0 after:left-[calc(1/2*100%-1px)] after:w-[2px] group-data-[side=left]:-right-4 group-data-[side=right]:left-0 sm:flex',
@@ -30,9 +30,9 @@
     )}
     bind:this={ref}
     tabIndex={-1}
-    title="Toggle Sidebar"
+    title={m.toggle_sidebar()}
     onclick={sidebar.toggle}
-    aria-label="Toggle Sidebar"
+    aria-label={m.toggle_sidebar()}
     data-sidebar="rail"
     data-slot="sidebar-rail"
     {...restProps}

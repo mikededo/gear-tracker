@@ -11,6 +11,7 @@
   "plugin.inlang.messageFormat": {
     "pathPattern": [
       "./inlang/messages/{locale}/auth.json",
+      "./inlang/messages/{locale}/dashboard.json",
       "./inlang/messages/{locale}/shared.json"
     ]
   }

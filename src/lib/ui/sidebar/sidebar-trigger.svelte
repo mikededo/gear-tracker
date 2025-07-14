@@ -3,6 +3,7 @@
 
     import { IconMenuDeep } from '@tabler/icons-svelte';
 
+    import { m } from '$lib/i18n/messages';
     import { Button } from '$lib/ui/button/index';
     import { cn } from '$lib/utils';
 
@@ -35,6 +36,5 @@
     {...restProps}
 >
     <IconMenuDeep class="!size-5 scale-x-[-1]" />
-    <!-- FIXME: Add locales -->
-    <span class="sr-only">Toggle Sidebar</span>
+    <span class="sr-only">{m.toggle_sidebar()}</span>
 </Button>

@@ -27,7 +27,6 @@
     const sidebar = useSidebar();
 </script>
 
-<!-- FIXME: Add i18n -->
 {#if collapsible === 'none'}
     <div
         class={cn(
@@ -52,10 +51,6 @@
             data-sidebar="sidebar"
             data-slot="sidebar"
         >
-            <Sheet.Header class="sr-only">
-                <Sheet.Title>Sidebar</Sheet.Title>
-                <Sheet.Description>Displays the mobile sidebar.</Sheet.Description>
-            </Sheet.Header>
             <div class="flex h-full w-full flex-col">
                 {@render children?.()}
             </div>

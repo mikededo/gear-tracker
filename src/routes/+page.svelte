@@ -13,15 +13,21 @@
 </script>
 
 <section class="flex min-h-[80vh] flex-col items-center justify-center px-4 text-center">
-    <h1 class="mb-4 text-4xl font-bold">Welcome {session ? 'back' : ''} to Gear Tracker</h1>
+    <h1 class="mb-4 text-4xl font-bold">
+        {#if session}
+            {m.landing_title_li()}
+        {:else}
+            {m.landing_title_lo()}
+        {/if}
+    </h1>
     <p class="mb-8 max-w-xl text-lg text-muted-foreground">
-        Effortlessly track, manage, and optimize your gear. Sign up to get started or sign in if you already have an account.
+        {m.landing_subtitle()}
     </p>
 
     <div class="flex justify-center gap-4">
         {#if session}
             <Button href={ROUTES.dashboard} size="lg">
-                Open dashboard
+                {m.open_dashboard()}
                 <IconChartBar />
             </Button>
         {:else}

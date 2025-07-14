@@ -29,6 +29,7 @@
     import { IconX } from '@tabler/icons-svelte';
     import { Dialog as SheetPrimitive } from 'bits-ui';
 
+    import { m } from '$lib/i18n/messages';
     import { cn } from '$lib/utils';
 
     import SheetOverlay from './sheet-overlay.svelte';
@@ -48,7 +49,6 @@
     }: Props = $props();
 </script>
 
-<!-- FIXME: Add locales -->
 <SheetPrimitive.Portal {...portalProps}>
     <SheetOverlay />
     <SheetPrimitive.Content
@@ -62,7 +62,7 @@
             class="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:pointer-events-none"
         >
             <IconX class="!size-4" />
-            <span class="sr-only">Close</span>
+            <span class="sr-only">{m.close()}</span>
         </SheetPrimitive.Close>
     </SheetPrimitive.Content>
 </SheetPrimitive.Portal>
