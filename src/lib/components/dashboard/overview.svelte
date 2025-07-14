@@ -8,6 +8,7 @@
         IconTrendingUp
     } from '@tabler/icons-svelte';
 
+    import { m } from '$lib/i18n/messages';
     import { formatCurrency, percent } from '$lib/utils';
 
     import StatCard from './stat-card.svelte';
@@ -72,27 +73,30 @@
     <!-- TODO: Add i18n -->
     <StatCard
         Icon={IconCurrencyDollar}
-        subtitle={`Across ${totalItems} items`}
-        title="Gear value"
+        subtitle={m.dashboard_overview_value_total_items({ count: totalItems })}
+        title={m.dashboard_overview_value_title()}
         value={formatCurrency(totalValue)}
     />
     <StatCard
         Icon={IconTrendingUp}
-        subtitle="Active gear items"
-        title="Items tracked"
+        subtitle={m.dashboard_overview_active_title()}
+        title={m.dashboard_overview_active_subtitle()}
         value={totalItems}
     />
     <StatCard
         Icon={IconAlertTriangle}
-        subtitle={`${criticalItems} critical, ${warningItems} warning`}
-        title="Needs attention"
+        title={m.dashboard_overview_need_attention_title()}
         value={criticalItems.length + warningItems.length}
         variant="warning"
+        subtitle={m.dashboard_overview_need_attention_subtitle({
+            critical: criticalItems.length,
+            warning: warningItems.length
+        })}
     />
     <StatCard
         Icon={IconCircleCheck}
-        subtitle="Items in good shape"
-        title="Good condition"
+        subtitle={m.dashboard_overview_good_condition_subtitle()}
+        title={m.dashboard_overview_good_condition_title()}
         value={totalItems - criticalItems.length - warningItems.length}
         variant="correct"
     />

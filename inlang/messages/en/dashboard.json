@@ -1,5 +1,21 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "dashboard_overview_active_subtitle": "Active gear items",
+  "dashboard_overview_active_title": "Items tracked",
+  "dashboard_overview_good_condition_subtitle": "Items in good shape",
+  "dashboard_overview_good_condition_title": "Good condition",
+  "dashboard_overview_need_attention_subtitle": "{critical} critical, {warning} warning",
+  "dashboard_overview_need_attention_title": "Needs attention",
+  "dashboard_overview_value_title": "Gear value",
+  "dashboard_overview_value_total_items": [{
+    "declarations": ["input count", "local countPlural = count: plural"],
+    "selectors": ["countPlural"],
+    "match": {
+      "countPlural=one": "Accros one item",
+      "countPlural=other, count=0": "You still have no items",
+      "countPlural=other, count=*": "Acros {count} items"
+    }
+  }],
   "landing_subtitle": "Effortlessly track, manage, and optimize your gear.",
   "landing_title_li": "Welcome back to Gear Tracker",
   "landing_title_lo": "Welcome to Gear Tracker",
