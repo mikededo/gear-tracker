@@ -2,7 +2,7 @@
 
 import * as v from 'valibot';
 
-export const SportTypeSchema = v.picklist(['both', 'cross_country_skiing', 'cycling', 'hiking', 'rowing', 'running', 'swimming', 'triathlon', 'walking']);
+export const SportIconSchema = v.picklist(['icon_bike', 'icon_row', 'icon_run', 'icon_shoe', 'icon_sky', 'icon_swim']);
 
 export const ClosetItemsSchema = v.object({
   brand: v.nullable(v.string()),
@@ -61,14 +61,14 @@ export const GearCategoriesSchema = v.object({
   created_at: v.string(),
   id: v.string(),
   key: v.string(),
-  sport_type: SportTypeSchema
+  sport_id: v.string()
 });
 export type GearCategoriesSchemaType = v.InferOutput<typeof GearCategoriesSchema>;
 
 export const GearCategoriesInsertSchema = v.object({
   created_at: v.optional(v.string()),
   key: v.string(),
-  sport_type: SportTypeSchema
+  sport_id: v.string()
 });
 export type GearCategoriesInsertSchemaType = v.InferOutput<typeof GearCategoriesInsertSchema>;
 
@@ -76,7 +76,7 @@ export const GearCategoriesUpdateSchema = v.object({
   created_at: v.optional(v.string()),
   id: v.optional(v.string()),
   key: v.optional(v.string()),
-  sport_type: v.optional(SportTypeSchema)
+  sport_id: v.optional(v.string())
 });
 export type GearCategoriesUpdateSchemaType = v.InferOutput<typeof GearCategoriesUpdateSchema>;
 
@@ -85,7 +85,7 @@ export const ProfilesSchema = v.object({
   first_name: v.nullable(v.string()),
   id: v.string(),
   last_name: v.nullable(v.string()),
-  primary_sport: v.nullable(v.unknown()),
+  primary_sport_id: v.nullable(v.string()),
   updated_at: v.string()
 });
 export type ProfilesSchemaType = v.InferOutput<typeof ProfilesSchema>;
@@ -94,7 +94,7 @@ export const ProfilesInsertSchema = v.object({
   created_at: v.optional(v.string()),
   first_name: v.optional(v.nullable(v.string())),
   last_name: v.optional(v.nullable(v.string())),
-  primary_sport: v.optional(v.nullable(v.unknown())),
+  primary_sport_id: v.optional(v.nullable(v.string())),
   updated_at: v.optional(v.string())
 });
 export type ProfilesInsertSchemaType = v.InferOutput<typeof ProfilesInsertSchema>;
@@ -104,36 +104,65 @@ export const ProfilesUpdateSchema = v.object({
   first_name: v.optional(v.nullable(v.string())),
   id: v.optional(v.string()),
   last_name: v.optional(v.nullable(v.string())),
-  primary_sport: v.optional(v.nullable(v.unknown())),
+  primary_sport_id: v.optional(v.nullable(v.string())),
   updated_at: v.optional(v.string())
 });
 export type ProfilesUpdateSchemaType = v.InferOutput<typeof ProfilesUpdateSchema>;
 
 export const SportsSchema = v.object({
   created_at: v.string(),
+  icon: SportIconSchema,
   id: v.string(),
-  name: v.string(),
-  updated_at: v.string(),
-  user_id: v.string()
+  is_active: v.boolean(),
+  key: v.string()
 });
 export type SportsSchemaType = v.InferOutput<typeof SportsSchema>;
 
 export const SportsInsertSchema = v.object({
   created_at: v.optional(v.string()),
-  name: v.string(),
-  updated_at: v.optional(v.string()),
-  user_id: v.string()
+  icon: v.optional(SportIconSchema),
+  is_active: v.optional(v.boolean()),
+  key: v.string()
 });
 export type SportsInsertSchemaType = v.InferOutput<typeof SportsInsertSchema>;
 
 export const SportsUpdateSchema = v.object({
   created_at: v.optional(v.string()),
+  icon: v.optional(SportIconSchema),
+  id: v.optional(v.string()),
+  is_active: v.optional(v.boolean()),
+  key: v.optional(v.string())
+});
+export type SportsUpdateSchemaType = v.InferOutput<typeof SportsUpdateSchema>;
+
+export const UserSportsSchema = v.object({
+  created_at: v.string(),
+  id: v.string(),
+  name: v.string(),
+  sport_id: v.string(),
+  updated_at: v.string(),
+  user_id: v.string()
+});
+export type UserSportsSchemaType = v.InferOutput<typeof UserSportsSchema>;
+
+export const UserSportsInsertSchema = v.object({
+  created_at: v.optional(v.string()),
+  name: v.string(),
+  sport_id: v.string(),
+  updated_at: v.optional(v.string()),
+  user_id: v.string()
+});
+export type UserSportsInsertSchemaType = v.InferOutput<typeof UserSportsInsertSchema>;
+
+export const UserSportsUpdateSchema = v.object({
+  created_at: v.optional(v.string()),
   id: v.optional(v.string()),
   name: v.optional(v.string()),
+  sport_id: v.optional(v.string()),
   updated_at: v.optional(v.string()),
   user_id: v.optional(v.string())
 });
-export type SportsUpdateSchemaType = v.InferOutput<typeof SportsUpdateSchema>;
+export type UserSportsUpdateSchemaType = v.InferOutput<typeof UserSportsUpdateSchema>;
 
 export const ActivitiesSchema = v.object({
   created_at: v.string(),
@@ -261,7 +290,6 @@ export type GearItemsUpdateSchemaType = v.InferOutput<typeof GearItemsUpdateSche
 export const SetupGearSchema = v.object({
   created_at: v.string(),
   gear_item_id: v.string(),
-  id: v.string(),
   setup_id: v.string()
 });
 export type SetupGearSchemaType = v.InferOutput<typeof SetupGearSchema>;
@@ -276,7 +304,6 @@ export type SetupGearInsertSchemaType = v.InferOutput<typeof SetupGearInsertSche
 export const SetupGearUpdateSchema = v.object({
   created_at: v.optional(v.string()),
   gear_item_id: v.optional(v.string()),
-  id: v.optional(v.string()),
   setup_id: v.optional(v.string())
 });
 export type SetupGearUpdateSchemaType = v.InferOutput<typeof SetupGearUpdateSchema>;
@@ -286,8 +313,8 @@ export const SetupsSchema = v.object({
   description: v.nullable(v.string()),
   id: v.string(),
   name: v.string(),
-  sport_id: v.string(),
-  updated_at: v.string()
+  updated_at: v.string(),
+  user_sport_id: v.string()
 });
 export type SetupsSchemaType = v.InferOutput<typeof SetupsSchema>;
 
@@ -295,8 +322,8 @@ export const SetupsInsertSchema = v.object({
   created_at: v.optional(v.string()),
   description: v.optional(v.nullable(v.string())),
   name: v.string(),
-  sport_id: v.string(),
-  updated_at: v.optional(v.string())
+  updated_at: v.optional(v.string()),
+  user_sport_id: v.string()
 });
 export type SetupsInsertSchemaType = v.InferOutput<typeof SetupsInsertSchema>;
 
@@ -305,7 +332,7 @@ export const SetupsUpdateSchema = v.object({
   description: v.optional(v.nullable(v.string())),
   id: v.optional(v.string()),
   name: v.optional(v.string()),
-  sport_id: v.optional(v.string()),
-  updated_at: v.optional(v.string())
+  updated_at: v.optional(v.string()),
+  user_sport_id: v.optional(v.string())
 });
 export type SetupsUpdateSchemaType = v.InferOutput<typeof SetupsUpdateSchema>;

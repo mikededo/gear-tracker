@@ -40,16 +40,13 @@ export type Database = {
       [_ in never]: never
     };
     Enums: {
-      sport_type:
-        | 'both' |
-        'cross_country_skiing' |
-        'cycling' |
-        'hiking' |
-        'rowing' |
-        'running' |
-        'swimming' |
-        'triathlon' |
-        'walking';
+      sport_icon:
+        | 'icon_bike' |
+        'icon_row' |
+        'icon_run' |
+        'icon_shoe' |
+        'icon_sky' |
+        'icon_swim';
     };
     Tables: {
       closet_items: {
@@ -112,16 +109,24 @@ export type Database = {
         };
       };
       gear_categories: {
-        Relationships: [];
+        Relationships: [
+          {
+            columns: ['sport_id'];
+            foreignKeyName: 'gear_categories_sport_id_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'sports';
+          }
+        ];
         Row: {
           created_at: string;
           id: string;
           key: string;
-          sport_type: Database['public']['Enums']['sport_type'];
+          sport_id: string;
         };
         Insert: {
           key: string;
-          sport_type: Database['public']['Enums']['sport_type'];
+          sport_id: string;
           created_at?: string;
           id?: string;
         };
@@ -129,18 +134,26 @@ export type Database = {
           created_at?: string;
           id?: string;
           key?: string;
-          sport_type?: Database['public']['Enums']['sport_type'];
+          sport_id?: string;
         };
       };
       profiles: {
-        Relationships: [];
+        Relationships: [
+          {
+            columns: ['primary_sport_id'];
+            foreignKeyName: 'profiles_primary_sport_id_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'sports';
+          }
+        ];
         Row: {
           created_at: string;
           first_name: null | string;
           id: string;
           last_name: null | string;
           updated_at: string;
-          primary_sport: Database['public']['Enums']['sport_type'] | null;
+          primary_sport_id: null | string;
         };
         Insert: {
           id: string;
@@ -148,7 +161,7 @@ export type Database = {
           first_name?: null | string;
           last_name?: null | string;
           updated_at?: string;
-          primary_sport?: Database['public']['Enums']['sport_type'] | null;
+          primary_sport_id?: null | string;
         };
         Update: {
           created_at?: string;
@@ -156,10 +169,34 @@ export type Database = {
           id?: string;
           last_name?: null | string;
           updated_at?: string;
-          primary_sport?: Database['public']['Enums']['sport_type'] | null;
+          primary_sport_id?: null | string;
         };
       };
       sports: {
+        Relationships: [];
+        Row: {
+          created_at: string;
+          id: string;
+          is_active: boolean;
+          key: string;
+          icon: Database['public']['Enums']['sport_icon'];
+        };
+        Insert: {
+          key: string;
+          created_at?: string;
+          id?: string;
+          is_active?: boolean;
+          icon?: Database['public']['Enums']['sport_icon'];
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          is_active?: boolean;
+          key?: string;
+          icon?: Database['public']['Enums']['sport_icon'];
+        };
+      };
+      user_sports: {
         Relationships: [
           {
             columns: ['user_id'];
@@ -167,6 +204,13 @@ export type Database = {
             isOneToOne: false;
             referencedColumns: ['id'];
             referencedRelation: 'profiles';
+          },
+          {
+            columns: ['sport_id'];
+            foreignKeyName: 'user_sports_sport_id_fkey';
+            isOneToOne: false;
+            referencedColumns: ['id'];
+            referencedRelation: 'sports';
           }
         ];
         Row: {
@@ -175,10 +219,12 @@ export type Database = {
           name: string;
           updated_at: string;
           user_id: string;
+          sport_id: string;
         };
         Insert: {
           name: string;
           user_id: string;
+          sport_id: string;
           created_at?: string;
           id?: string;
           updated_at?: string;
@@ -189,6 +235,7 @@ export type Database = {
           name?: string;
           updated_at?: string;
           user_id?: string;
+          sport_id?: string;
         };
       };
       activities: {
@@ -373,30 +420,27 @@ export type Database = {
         Row: {
           created_at: string;
           gear_item_id: string;
-          id: string;
           setup_id: string;
         };
         Insert: {
           gear_item_id: string;
           setup_id: string;
           created_at?: string;
-          id?: string;
         };
         Update: {
           created_at?: string;
           gear_item_id?: string;
-          id?: string;
           setup_id?: string;
         };
       };
       setups: {
         Relationships: [
           {
-            columns: ['sport_id'];
+            columns: ['user_sport_id'];
             foreignKeyName: 'setups_sport_id_fkey';
             isOneToOne: false;
             referencedColumns: ['id'];
-            referencedRelation: 'sports';
+            referencedRelation: 'user_sports';
           }
         ];
         Row: {
@@ -405,11 +449,11 @@ export type Database = {
           name: string;
           updated_at: string;
           description: null | string;
-          sport_id: string;
+          user_sport_id: string;
         };
         Insert: {
           name: string;
-          sport_id: string;
+          user_sport_id: string;
           created_at?: string;
           id?: string;
           updated_at?: string;
@@ -421,7 +465,7 @@ export type Database = {
           name?: string;
           updated_at?: string;
           description?: null | string;
-          sport_id?: string;
+          user_sport_id?: string;
         };
       };
     };
@@ -542,16 +586,13 @@ export const Constants = {
   },
   public: {
     Enums: {
-      sport_type: [
-        'cycling',
-        'running',
-        'swimming',
-        'triathlon',
-        'hiking',
-        'walking',
-        'rowing',
-        'cross_country_skiing',
-        'both'
+      sport_icon: [
+        'icon_bike',
+        'icon_run',
+        'icon_shoe',
+        'icon_swim',
+        'icon_row',
+        'icon_sky'
       ]
     }
   }
