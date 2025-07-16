@@ -3,6 +3,7 @@
 import * as v from 'valibot';
 
 export const SportIconSchema = v.picklist(['icon_bike', 'icon_row', 'icon_run', 'icon_shoe', 'icon_sky', 'icon_swim']);
+export type SportIconSchemaType = v.InferOutput<typeof SportIconSchema>;
 
 export const ClosetItemsSchema = v.object({
   brand: v.nullable(v.string()),
@@ -114,7 +115,8 @@ export const SportsSchema = v.object({
   icon: SportIconSchema,
   id: v.string(),
   is_active: v.boolean(),
-  key: v.string()
+  key: v.string(),
+  slug: v.string()
 });
 export type SportsSchemaType = v.InferOutput<typeof SportsSchema>;
 
@@ -122,7 +124,8 @@ export const SportsInsertSchema = v.object({
   created_at: v.optional(v.string()),
   icon: v.optional(SportIconSchema),
   is_active: v.optional(v.boolean()),
-  key: v.string()
+  key: v.string(),
+  slug: v.string()
 });
 export type SportsInsertSchemaType = v.InferOutput<typeof SportsInsertSchema>;
 
@@ -131,7 +134,8 @@ export const SportsUpdateSchema = v.object({
   icon: v.optional(SportIconSchema),
   id: v.optional(v.string()),
   is_active: v.optional(v.boolean()),
-  key: v.optional(v.string())
+  key: v.optional(v.string()),
+  slug: v.optional(v.string())
 });
 export type SportsUpdateSchemaType = v.InferOutput<typeof SportsUpdateSchema>;
 
@@ -139,6 +143,7 @@ export const UserSportsSchema = v.object({
   created_at: v.string(),
   id: v.string(),
   name: v.string(),
+  slug: v.string(),
   sport_id: v.string(),
   updated_at: v.string(),
   user_id: v.string()
@@ -148,6 +153,7 @@ export type UserSportsSchemaType = v.InferOutput<typeof UserSportsSchema>;
 export const UserSportsInsertSchema = v.object({
   created_at: v.optional(v.string()),
   name: v.string(),
+  slug: v.string(),
   sport_id: v.string(),
   updated_at: v.optional(v.string()),
   user_id: v.string()
@@ -158,6 +164,7 @@ export const UserSportsUpdateSchema = v.object({
   created_at: v.optional(v.string()),
   id: v.optional(v.string()),
   name: v.optional(v.string()),
+  slug: v.optional(v.string()),
   sport_id: v.optional(v.string()),
   updated_at: v.optional(v.string()),
   user_id: v.optional(v.string())
@@ -313,6 +320,7 @@ export const SetupsSchema = v.object({
   description: v.nullable(v.string()),
   id: v.string(),
   name: v.string(),
+  slug: v.string(),
   updated_at: v.string(),
   user_sport_id: v.string()
 });
@@ -322,6 +330,7 @@ export const SetupsInsertSchema = v.object({
   created_at: v.optional(v.string()),
   description: v.optional(v.nullable(v.string())),
   name: v.string(),
+  slug: v.string(),
   updated_at: v.optional(v.string()),
   user_sport_id: v.string()
 });
@@ -332,6 +341,7 @@ export const SetupsUpdateSchema = v.object({
   description: v.optional(v.nullable(v.string())),
   id: v.optional(v.string()),
   name: v.optional(v.string()),
+  slug: v.optional(v.string()),
   updated_at: v.optional(v.string()),
   user_sport_id: v.optional(v.string())
 });

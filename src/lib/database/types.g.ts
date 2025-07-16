@@ -179,10 +179,12 @@ export type Database = {
           id: string;
           is_active: boolean;
           key: string;
+          slug: string;
           icon: Database['public']['Enums']['sport_icon'];
         };
         Insert: {
           key: string;
+          slug: string;
           created_at?: string;
           id?: string;
           is_active?: boolean;
@@ -193,6 +195,7 @@ export type Database = {
           id?: string;
           is_active?: boolean;
           key?: string;
+          slug?: string;
           icon?: Database['public']['Enums']['sport_icon'];
         };
       };
@@ -217,12 +220,14 @@ export type Database = {
           created_at: string;
           id: string;
           name: string;
+          slug: string;
           updated_at: string;
           user_id: string;
           sport_id: string;
         };
         Insert: {
           name: string;
+          slug: string;
           user_id: string;
           sport_id: string;
           created_at?: string;
@@ -233,6 +238,7 @@ export type Database = {
           created_at?: string;
           id?: string;
           name?: string;
+          slug?: string;
           updated_at?: string;
           user_id?: string;
           sport_id?: string;
@@ -447,12 +453,14 @@ export type Database = {
           created_at: string;
           id: string;
           name: string;
+          slug: string;
           updated_at: string;
           description: null | string;
           user_sport_id: string;
         };
         Insert: {
           name: string;
+          slug: string;
           user_sport_id: string;
           created_at?: string;
           id?: string;
@@ -463,6 +471,7 @@ export type Database = {
           created_at?: string;
           id?: string;
           name?: string;
+          slug?: string;
           updated_at?: string;
           description?: null | string;
           user_sport_id?: string;
