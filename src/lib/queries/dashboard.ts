@@ -10,7 +10,7 @@ export type DashboardSetup = DashboardData[number]['setups'][number];
 export type DashboardSetupGear = DashboardData[number]['setups'][number]['gear_items'][number];
 export type DashboardSport = DashboardData[number];
 
-export const getDashboard = async (client: Client, user: string) => client.from('user_sports')
+export const getDashboard = (client: Client, user: string) => client.from('user_sports')
   .select(`
   id, name, slug,
   ...sports(key, icon),
@@ -28,7 +28,7 @@ export const useDashboardQuery = (user: string) => {
   const supabase = useSupabaseClient();
 
   return createQuery({
-    queryFn: () => getDashboard(supabase, user),
+    queryFn: async () => await getDashboard(supabase, user),
     queryKey: QUERY_KEYS.dashboard
   });
 };

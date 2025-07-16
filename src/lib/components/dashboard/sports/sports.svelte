@@ -5,12 +5,10 @@
         IconChevronDown,
         IconPlus
     } from '@tabler/icons-svelte';
-    import { createQuery } from '@tanstack/svelte-query';
     import { SvelteSet } from 'svelte/reactivity';
 
-    import { QUERY_KEYS, ROUTES } from '$lib/constants';
-    import { useSupabaseClient } from '$lib/context/supabase';
-    import { getDashboard } from '$lib/queries/dashboard';
+    import { ROUTES } from '$lib/constants';
+    import { useDashboardQuery } from '$lib/queries/dashboard';
     import { Badge, Button, Card } from '$lib/ui';
     import { getRemainingUsage, getSportName, percent } from '$lib/utils';
 
@@ -20,14 +18,9 @@
     type Props = { user: string };
     const { user }: Props = $props();
 
-    const supabase = useSupabaseClient();
-
     const collapsedSetups = new SvelteSet();
 
-    const dashboardQuery = $derived(createQuery({
-        queryFn: () => getDashboard(supabase, user),
-        queryKey: QUERY_KEYS.dashboard
-    }));
+    const dashboardQuery = $derived(useDashboardQuery(user));
 
     const getSetupUsageRate = (setup: DashboardSetup) => {
         const itemsWithMaxUsage = setup.gear_items.filter((item) => item.max_usage);
@@ -58,7 +51,7 @@
             <Card.Header class="flex items-center justify-between border-b bg-primary/10 !py-4">
                 <a
                     class="flex items-center gap-2 text-xl font-semibold underline-offset-2 hover:underline"
-                    href="{ROUTES.sport(sport.slug)}}"
+                    href={ROUTES.sport(sport.slug)}
                 >
                     <SportIcon icon={sport.icon} />
                     {getSportName(sport.key)}
@@ -92,7 +85,7 @@
             <div class="flex items-center gap-2">
                 <a
                     class="text-lg font-semibold underline-offset-2 hover:underline"
-                    href="{ROUTES.setup(setup.slug, sport)}}"
+                    href={ROUTES.setup(setup.slug, sport)}
                 >
                     {setup.name}
                 </a>
