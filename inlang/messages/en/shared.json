@@ -6,6 +6,18 @@
   "dashboard": "Dashboard",
   "sign_in": "Sign in",
   "sign_up": "Sign up",
+  "sport_cross_country_skiing": "Cross-country skiing",
+  "sport_gravel_cycling": "Gravel cycling",
+  "sport_hiking": "Hiking",
+  "sport_mtb_cycling": "MTB cycling",
+  "sport_road_cycling": "Cycling",
+  "sport_rowing": "Rowing",
+  "sport_running": "Running",
+  "sport_swimming": "Swimming",
+  "sport_trail_running": "Trail running",
+  "sport_triathlon": "Triathlon",
+  "sport_unknown": "Unknown",
+  "sport_walking": "Walking",
   "sports": "Sports",
   "toggle_sidebar": "Toggle sidebar"
 }

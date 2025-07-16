@@ -1,14 +1,24 @@
 <script lang="ts">
     import type { Snippet } from 'svelte';
 
-    import { IconRecharging } from '@tabler/icons-svelte';
+    import type { LayoutData } from './$types';
 
+    import { IconRecharging } from '@tabler/icons-svelte';
+    import { createQuery } from '@tanstack/svelte-query';
+
+    import { Navigation } from '$lib/components/dashboard';
+    import { QUERY_KEYS } from '$lib/constants';
     import { m } from '$lib/i18n/messages';
-    // TODO: Fetch data for the sidebar
+    import { getDashboard } from '$lib/queries/dashboard';
     import { Separator, Sidebar } from '$lib/ui';
 
-    type Props = { children: Snippet };
-    const { children }: Props = $props();
+    type Props = { children: Snippet; data: LayoutData };
+    const { children, data }: Props = $props();
+
+    const _dashboardQuery = $derived(createQuery({
+        queryFn: () => getDashboard(data.supabase, data.user!.id),
+        queryKey: QUERY_KEYS.dashboard
+    }));
 </script>
 
 <Sidebar.Provider
@@ -21,21 +31,7 @@
                 <span class="text-lg font-semibold">Gear tracker</span>
             </div>
         </Sidebar.Header>
-        <Sidebar.Content>
-            <!-- TODO: Add collapsible -->
-            <Sidebar.Group>
-                <Sidebar.GroupLabel>{m.sports()}</Sidebar.GroupLabel>
-                <Sidebar.Menu>
-                    <!-- TODO: Update with user's data -->
-                </Sidebar.Menu>
-            </Sidebar.Group>
-            <Sidebar.Group>
-                <Sidebar.GroupLabel>{m.closet()}</Sidebar.GroupLabel>
-                <Sidebar.Menu>
-                    <!-- TODO: Update with user's data -->
-                </Sidebar.Menu>
-            </Sidebar.Group>
-        </Sidebar.Content>
+        <Navigation user={data.user!.id} />
     </Sidebar.Root>
 
     <Sidebar.Inset>

@@ -10,7 +10,8 @@ export const ROUTES = {
     signUp: '/auth/sign-up'
   },
   dashboard: '/dashboard',
-  landing: '/'
+  landing: '/',
+  setup: (sport: string, setup: string) => `/dashboard/${sport}/${setup}`
 };
 
 export const QUERY_KEYS = {
