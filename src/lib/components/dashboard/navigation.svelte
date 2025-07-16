@@ -1,56 +1,20 @@
 <script lang="ts">
-    import type { SportsSchemaType } from '$lib/database';
-
-    import { createQuery } from '@tanstack/svelte-query';
+    import type { DashboardData } from '$lib/queries/dashboard';
 
     import { SportIcon } from '$lib/components/shared';
-    import { QUERY_KEYS, ROUTES } from '$lib/constants';
-    import { useSupabaseClient } from '$lib/context/supabase';
+    import { ROUTES } from '$lib/constants';
     import { m } from '$lib/i18n/messages';
-    import { getDashboard } from '$lib/queries/dashboard';
+    import { useDashboardQuery } from '$lib/queries/dashboard';
     import { Collapsible, Sidebar } from '$lib/ui';
     import { getSportName } from '$lib/utils';
 
     type Props = { user: string };
     const { user }: Props = $props();
 
-    type NavigationSetup = { id: string; name: string; slug: string };
-    type NavigationMap = Map<
-        string,
-        { setups: NavigationSetup[]; sport: SportsSchemaType }
-    >;
-    let navigation: NavigationMap = $state(new Map());
-
-    const supabase = useSupabaseClient();
-
-    const dashboardQuery = $derived(createQuery({
-        queryFn: () => getDashboard(supabase, user),
-        queryKey: QUERY_KEYS.dashboard
-    }));
-    dashboardQuery.subscribe(({ data }) => {
-        const { data: dashboard, error } = data ?? {};
-        if (error || !dashboard) {
-            return;
-        }
-
-        navigation = dashboard.reduce<NavigationMap>(
-            (acc, { id, name, slug, sports: sport }) => {
-                const value = { id, name, slug };
-                const items = acc.get(sport.id);
-
-                if (items) {
-                    items.setups.push(value);
-                } else {
-                    acc.set(sport.id, { setups: [value], sport });
-                }
-                return acc;
-            },
-            new Map()
-        );
-    });
+    const dashboardQuery = $derived(useDashboardQuery(user));
 </script>
 
-{#snippet sports_content(sport: string, setups: NavigationSetup[])}
+{#snippet sports_content(sport: string, setups: DashboardData[number]['setups'])}
     <Collapsible.Content>
         <Sidebar.MenuSub>
             {#each setups as setup}
@@ -68,8 +32,8 @@
     </Collapsible.Content>
 {/snippet}
 
-{#snippet sports()}
-    {#each navigation.values() as { setups, sport }(sport.id)}
+{#snippet sports(data: DashboardData)}
+    {#each data as sport}
         <Collapsible.Root open>
             {#snippet child({ props })}
                 <Sidebar.MenuItem {...props}>
@@ -82,7 +46,7 @@
                         {/snippet}
                     </Collapsible.Trigger>
                 </Sidebar.MenuItem>
-                {@render sports_content(sport.slug, setups)}
+                {@render sports_content(sport.slug, sport.setups)}
             {/snippet}
         </Collapsible.Root>
     {/each}
@@ -92,7 +56,9 @@
     <Sidebar.Group>
         <Sidebar.GroupLabel>{m.sports()}</Sidebar.GroupLabel>
         <Sidebar.Menu>
-            {@render sports()}
+            {#if $dashboardQuery.data?.data}
+                {@render sports($dashboardQuery.data?.data)}
+            {/if}
         </Sidebar.Menu>
     </Sidebar.Group>
     <Sidebar.Group>

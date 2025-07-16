@@ -4,21 +4,13 @@
     import type { LayoutData } from './$types';
 
     import { IconRecharging } from '@tabler/icons-svelte';
-    import { createQuery } from '@tanstack/svelte-query';
 
     import { Navigation } from '$lib/components/dashboard';
-    import { QUERY_KEYS } from '$lib/constants';
     import { m } from '$lib/i18n/messages';
-    import { getDashboard } from '$lib/queries/dashboard';
     import { Separator, Sidebar } from '$lib/ui';
 
     type Props = { children: Snippet; data: LayoutData };
     const { children, data }: Props = $props();
-
-    const _dashboardQuery = $derived(createQuery({
-        queryFn: () => getDashboard(data.supabase, data.user!.id),
-        queryKey: QUERY_KEYS.dashboard
-    }));
 </script>
 
 <Sidebar.Provider

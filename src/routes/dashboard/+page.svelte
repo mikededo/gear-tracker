@@ -13,5 +13,4 @@
     Welcome {user?.first_name}
 </h1>
 
-<Overview data={data.dashboard} />
-
+<Overview user={user.id} />
