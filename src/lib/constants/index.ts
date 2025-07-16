@@ -11,7 +11,8 @@ export const ROUTES = {
   },
   dashboard: '/dashboard',
   landing: '/',
-  setup: (sport: string, setup: string) => `/dashboard/${sport}/${setup}`
+  setup: (sport: string, setup: string) => `/dashboard/${sport}/${setup}`,
+  sport: (sport: string) => `/dashboard/${sport}`
 };
 
 export const QUERY_KEYS = {

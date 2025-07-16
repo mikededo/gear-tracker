@@ -18,7 +18,38 @@ export const formatCurrency = (amount: number) => new Intl.NumberFormat('en-US',
   style: 'currency'
 }).format(amount);
 
+// TODO: Allow user to choose metric/imperial system
+export const formatDistance = (distance: number) =>
+  distance >= 1000 ? `${(distance / 1000).toFixed(1)}k km` : `${distance} km`;
+
+export const formatDuration = (duration: number) => {
+  const hours = Math.floor(duration / 60);
+  const minutes = Math.floor(duration % 60);
+  return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+};
+
 export const percent = (value: number, max: null | number) => max ? Math.min((value / max) * 100, 100) : 0;
+
+export type UsageStatus = 'critical' | 'good' | 'warning';
+export const getUsageStatus = (current: number, max: null | number): UsageStatus => {
+  if (!max) {
+    return 'good';
+  }
+
+  const uasge = percent(current, max);
+  if (uasge >= 90) {
+    return 'critical';
+  }
+
+  if (uasge >= 70) {
+    return 'warning';
+  }
+
+  return 'good';
+};
+
+export const getRemainingUsage = (current: number, max: null | number) =>
+  max === null ? Infinity : current;
 
 export const getSportName = (key: string) => {
   switch (key) {

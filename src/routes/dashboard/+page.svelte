@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { PageData } from './$types';
 
-    import { Overview } from '$lib/components/dashboard';
+    import { Overview, Sports } from '$lib/components/dashboard';
 
     type Props = { data: PageData };
     const { data }: Props = $props();
@@ -14,3 +14,4 @@
 </h1>
 
 <Overview user={user.id} />
+<Sports user={user.id} />

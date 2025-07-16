@@ -6,6 +6,9 @@ import { QUERY_KEYS } from '$lib/constants';
 import { useSupabaseClient } from '$lib/context/supabase';
 
 export type DashboardData = Result<typeof getDashboard>;
+export type DashboardSetup = DashboardData[number]['setups'][number];
+export type DashboardSetupGear = DashboardData[number]['setups'][number]['gear_items'][number];
+export type DashboardSport = DashboardData[number];
 
 export const getDashboard = async (client: Client, user: string) => client.from('user_sports')
   .select(`

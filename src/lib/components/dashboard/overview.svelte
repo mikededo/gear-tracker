@@ -1,6 +1,4 @@
 <script lang="ts">
-    import type { DashboardData } from '$lib/queries/dashboard';
-
     import {
         IconAlertTriangle,
         IconCircleCheck,
@@ -10,7 +8,7 @@
 
     import { m } from '$lib/i18n/messages';
     import { useDashboardQuery } from '$lib/queries/dashboard';
-    import { formatCurrency, percent } from '$lib/utils';
+    import { formatCurrency, getUsageStatus } from '$lib/utils';
 
     import StatCard from './stat-card.svelte';
 
@@ -55,24 +53,6 @@
             warningItems
         };
     });
-
-    const getUsageStatus = (current: number, max: null | number) => {
-        if (!max) {
-            return 'good';
-        }
-
-        const uasge = percent(current, max);
-        if (uasge >= 90) {
-            return 'critical';
-        }
-
-        if (uasge >= 70) {
-            return 'warning';
-        }
-
-        return 'good';
-    };
-
 </script>
 
 <section class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">

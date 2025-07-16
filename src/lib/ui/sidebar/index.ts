@@ -22,7 +22,7 @@ import Separator from './sidebar-separator.svelte';
 import Trigger from './sidebar-trigger.svelte';
 import Root from './sidebar.svelte';
 
-export { useSidebar } from './context.svelte.js';
+export { useSidebar } from './context.svelte';
 
 export const Sidebar = {
   Content,
