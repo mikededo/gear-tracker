@@ -283,9 +283,13 @@ const generateFieldSchema = (field: FieldInfo): string => generateOptionalField(
   field.isOptional
 );
 
-const generateEnumSchema = (name: string, values: string[]): string => `export const ${generateSchemaName(name)} = v.picklist([${
-  values.map((v) => `'${v}'`).join(', ')
-}]);`;
+const generateEnumSchema = (name: string, values: string[]): string => {
+  const schemaName = generateSchemaName(name);
+  return `
+export const ${schemaName} = v.picklist([${values.map((v) => `'${v}'`).join(', ')}]);
+export type ${schemaName}Type = v.InferOutput<typeof ${schemaName}>;
+`;
+};
 
 const capitalize = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
 
