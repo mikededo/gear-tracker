@@ -1,3 +1,5 @@
+type Slug = string;
+
 export const ROUTES = {
   actions: {
     authSignIn: '/auth?/sign-in',
@@ -11,11 +13,13 @@ export const ROUTES = {
   },
   dashboard: '/dashboard',
   landing: '/',
-  setup: (sport: string, setup: string) => `/dashboard/${sport}/${setup}`,
-  sport: (sport: string) => `/dashboard/${sport}`
+  setup: (sport: Slug, setup: Slug) => `/dashboard/${sport}/${setup}`,
+  sport: (sport: Slug) => `/dashboard/${sport}`
 };
 
 export const QUERY_KEYS = {
-  dashboard: ['dashboard']
+  dashboard: ['dashboard'],
+  setup: (sport: Slug, setup: Slug) => ['dashboard', sport, setup],
+  sport: (sport: Slug) => ['dashboard', sport]
 };
 

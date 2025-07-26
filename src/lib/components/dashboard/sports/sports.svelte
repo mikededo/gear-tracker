@@ -85,7 +85,7 @@
             <div class="flex items-center gap-2">
                 <a
                     class="text-lg font-semibold underline-offset-2 hover:underline"
-                    href={ROUTES.setup(setup.slug, sport)}
+                    href={ROUTES.setup(sport, setup.slug)}
                 >
                     {setup.name}
                 </a>

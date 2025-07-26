@@ -55,7 +55,7 @@
     });
 </script>
 
-<section class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+<section class="grid grid-cols-2 gap-4 lg:grid-cols-4">
     <StatCard
         Icon={IconCurrencyDollar}
         subtitle={m.dashboard_overview_value_total_items({ count: totalItems })}
