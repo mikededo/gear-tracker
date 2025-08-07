@@ -22,6 +22,7 @@ export default antfu(
       'node_modules/',
       'package/',
       'postcss.config.js',
+      './src/lib/i18n/',
       'tsconfig.tsbuildinfo'
     ],
     jsonc: true,
@@ -100,6 +101,13 @@ export default antfu(
     }
   },
   {
+    files: ['**/*.svelte.ts'],
+    rules: {
+      'style/indent': ['error', 2],
+      'svelte/indent': ['off']
+    }
+  },
+  {
     files: ['./src/**/*.svelte', './src/**/*.ts'],
     plugins: { 'svelte-tailwindcss': svelteTailwindcss },
     rules: {
@@ -173,6 +181,8 @@ export default antfu(
     }
   })
   .override('antfu/svelte/rules', {
+    files: ['**/*.svelte'],
+    ignores: ['**/*.svelte.ts'],
     rules: {
       'style/indent-binary-ops': ['error', 4],
       'svelte/html-closing-bracket-new-line': ['error'],
@@ -241,3 +251,4 @@ export default antfu(
       ]
     }
   });
+
