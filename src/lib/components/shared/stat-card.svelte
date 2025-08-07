@@ -17,7 +17,11 @@
 
     const styles = tv({
         variants: {
-            type: { correct: 'text-green-500', warning: 'text-orange-500' }
+            type: {
+                correct: 'text-green-500',
+                critical: 'text-red-500',
+                warning: 'text-orange-500'
+            }
         }
     });
 </script>

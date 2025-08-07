@@ -82,7 +82,7 @@
                     </div>
                 </Card.Header>
 
-                <Card.Content class="space-y-3">
+                <Card.Content class="space-y-1.5">
                     {@render usage({
                         max: item.max_usage ?? Infinity,
                         percent: item.max_usage ? percent(item.current_usage, item.max_usage) : Infinity,

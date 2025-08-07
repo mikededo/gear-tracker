@@ -1,5 +1,7 @@
 import type { Client } from '$lib/database';
 
+import type { DashboardSport } from './dashboard';
+
 import { createQuery } from '@tanstack/svelte-query';
 
 import { QUERY_KEYS } from '$lib/constants';
@@ -11,6 +13,8 @@ type GetSportArgs = {
   user: string;
   sport: string;
 };
+export type Sport = DashboardSport;
+export type SportSetup = Sport['setups'][number];
 export const getSport = async (client: Client, { sport, user }: GetSportArgs) =>
   getDashboard(client, user).eq('slug', sport).single();
 

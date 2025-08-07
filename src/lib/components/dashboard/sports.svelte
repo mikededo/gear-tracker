@@ -7,13 +7,11 @@
     } from '@tabler/icons-svelte';
     import { SvelteSet } from 'svelte/reactivity';
 
+    import { SetupGear, SportIcon } from '$lib/components/shared';
     import { ROUTES } from '$lib/constants';
     import { useDashboardQuery } from '$lib/queries/dashboard';
     import { Badge, Button, Card } from '$lib/ui';
     import { getRemainingUsage, getSportName, percent } from '$lib/utils';
-
-    import { SportIcon } from '../../shared';
-    import SetupGear from './setup-gear.svelte';
 
     type Props = { user: string };
     const { user }: Props = $props();
@@ -90,7 +88,7 @@
                     {setup.name}
                 </a>
 
-                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-1">
                     <Badge class="text-xs" variant="outline">
                         {getSetupUsageRate(setup).toFixed(1)}% avg usage
                     </Badge>

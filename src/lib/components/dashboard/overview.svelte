@@ -6,11 +6,10 @@
         IconTrendingUp
     } from '@tabler/icons-svelte';
 
+    import { StatCard } from '$lib/components/shared';
     import { m } from '$lib/i18n/messages';
     import { useDashboardQuery } from '$lib/queries/dashboard';
     import { formatCurrency, getUsageStatus } from '$lib/utils';
-
-    import StatCard from './stat-card.svelte';
 
     type Props = { user: string };
     const { user }: Props = $props();
