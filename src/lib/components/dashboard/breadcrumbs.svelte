@@ -1,9 +1,8 @@
 <script lang="ts">
-    import { ROUTES } from '$lib/constants';
-    import { initCrumbsContext } from '$lib/context/breadcrumbs.svelte';
+    import { getCrumbs } from '$lib/context/breadcrumbs.svelte';
     import { Breadcrumb } from '$lib/ui';
 
-    const crumbs = initCrumbsContext([{ href: ROUTES.dashboard, name: 'Dashboard' }]);
+    const crumbs = getCrumbs();
 </script>
 
 <Breadcrumb.Root>

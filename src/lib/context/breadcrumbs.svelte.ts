@@ -2,7 +2,12 @@ import { getContext, setContext } from 'svelte';
 
 const CONTEXT_KEY = 'breadcrumbs';
 
-type Crumb = { name: string; href?: string };
+type Crumb = {
+  id: symbol;
+  name: string;
+  href?: string;
+};
+
 const breadcrumbs = $state({ crumbs: [] as Crumb[] });
 
 export const initCrumbsContext = (crumbs: Crumb[] = []) => {
@@ -12,10 +17,3 @@ export const initCrumbsContext = (crumbs: Crumb[] = []) => {
 
 export const getCrumbs = () => getContext<typeof breadcrumbs>(Symbol.for(CONTEXT_KEY));
 
-export const pushCrumb = (crumb: Crumb) => {
-  breadcrumbs.crumbs = [...breadcrumbs.crumbs, crumb];
-};
-
-export const popCrumb = () => {
-  breadcrumbs.crumbs = breadcrumbs.crumbs.slice(0, -1);
-};

@@ -4,7 +4,7 @@
     import type { LayoutData } from './$types';
 
     import { IconRecharging } from '@tabler/icons-svelte';
-    import { fade, fly } from 'svelte/transition';
+    import { fade } from 'svelte/transition';
 
     import { page } from '$app/state';
     import { Breadcrumbs, Navigation } from '$lib/components/dashboard';
@@ -16,7 +16,11 @@
     type Props = { children: Snippet; data: LayoutData };
     const { children, data }: Props = $props();
 
-    initCrumbsContext([{ href: ROUTES.dashboard, name: 'Dashboard' }]);
+    initCrumbsContext([{
+        href: ROUTES.dashboard,
+        id: Symbol('dashboard'),
+        name: 'Dashboard'
+    }]);
 </script>
 
 <Sidebar.Provider
@@ -44,7 +48,9 @@
                         {m.dashboard()}
                     </p>
                 {:else}
-                    <div in:fade={{ duration: 250 }}><Breadcrumbs /></div>
+                    <div in:fade={{ duration: 250 }}>
+                        <Breadcrumbs />
+                    </div>
                 {/if}
             </div>
         </header>
