@@ -27,9 +27,9 @@
 </script>
 
 <Card.Root class="gap-0 py-4">
-    <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+    <Card.Header class="flex flex-1 flex-row items-start justify-between space-y-0 pb-2">
         <Card.Title class="text-sm font-medium uppercase">{title}</Card.Title>
-        <Icon class={styles({ class: 'size-4', type: variant })} />
+        <Icon class={styles({ class: 'size-4 shrink-0 mt-0.5', type: variant })} />
     </Card.Header>
     <Card.Content>
         <p class={styles({ class: 'text-2xl font-bold', type: variant })}>

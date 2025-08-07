@@ -114,40 +114,42 @@
             </div>
         </div>
 
-        <div class="grip-cols-1 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            <StatCard
-                Icon={IconCurrencyDollar}
-                subtitle="Total value"
-                title="Across all setups"
-                value={formatCurrency(totalValue)}
-            />
-            <StatCard
-                Icon={IconWaveSawTool}
-                subtitle="Average usage"
-                title="Across all setups"
-                value={`${averageUsage.toFixed(2)}%`}
-            />
-            <StatCard
-                Icon={IconAlertTriangle}
-                subtitle="Need replacement"
-                title="Critical items"
-                value={criticalItems}
-                variant="critical"
-            />
-            <StatCard
-                Icon={IconClock}
-                subtitle="Monitor closely"
-                title="Warning items"
-                value={warningItems}
-                variant="warning"
-            />
-            <StatCard
-                Icon={IconCircleCheck}
-                subtitle="Healthy items"
-                title="Good condition"
-                value={goodItems}
-                variant="correct"
-            />
+        <div class="@container">
+            <div class="grip-cols-1 grid gap-4 @sm:grid-cols-2 @xl:grid-cols-3 @4xl:grid-cols-5">
+                <StatCard
+                    Icon={IconCurrencyDollar}
+                    subtitle="Total value"
+                    title="Across all setups"
+                    value={formatCurrency(totalValue)}
+                />
+                <StatCard
+                    Icon={IconWaveSawTool}
+                    subtitle="Average usage"
+                    title="Across all setups"
+                    value={`${averageUsage.toFixed(2)}%`}
+                />
+                <StatCard
+                    Icon={IconAlertTriangle}
+                    subtitle="Need replacement"
+                    title="Critical items"
+                    value={criticalItems}
+                    variant="critical"
+                />
+                <StatCard
+                    Icon={IconClock}
+                    subtitle="Monitor closely"
+                    title="Warning items"
+                    value={warningItems}
+                    variant="warning"
+                />
+                <StatCard
+                    Icon={IconCircleCheck}
+                    subtitle="Healthy items"
+                    title="Good condition"
+                    value={goodItems}
+                    variant="correct"
+                />
+            </div>
         </div>
 
         <Card.Root class="gap-4">
