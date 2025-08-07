@@ -8,13 +8,14 @@
         IconCircleCheck,
         IconClock,
         IconCurrencyDollar,
-        IconEdit,
+        IconPencil,
         IconSettings,
         IconTarget,
         IconWaveSawTool
     } from '@tabler/icons-svelte';
 
     import { SetupGear, SportIcon, StatCard } from '$lib/components/shared';
+    import { CreateSetupDialog } from '$lib/components/sport';
     import { ROUTES } from '$lib/constants';
     import { useSportQuery } from '$lib/queries/sport';
     import { Badge, Button, Card, Progress } from '$lib/ui';
@@ -101,16 +102,15 @@
                     {sport.name}
                 </h1>
                 <p class="text-sm">
-                    {totalSetups} setup {totalSetups !== 1 ? 's' : ''} &centerdot; {totalItems} gear items
+                    {totalSetups} setup{totalSetups !== 1 ? 's' : ''} &centerdot; {totalItems} gear items
                 </p>
             </div>
 
             <div class="flex items-center space-x-2">
-                <Button size="sm" variant="outline">
-                    <IconSettings class="mr-2 size-4" />
-                    <span>Edit sport</span>
+                <Button size="icon" variant="ghost">
+                    <IconSettings class="size-4" />
                 </Button>
-                <!-- <CreateSetupModal sports={[sport]} onCreateSetup={onCreateSetup} /> -->
+                <CreateSetupDialog sportId={$query.data.data.id} />
             </div>
         </div>
 
@@ -160,8 +160,8 @@
                 </Card.Title>
                 <Card.Description>Usage rates across all setups in this sport</Card.Description>
             </Card.Header>
-            <Card.Content>
-                <div class="space-y-4">
+            <Card.Content class="@container">
+                <div class="grid grid-cols-1 gap-4 @7xl:grid-cols-2">
                     {#each sport.setups as setup}
                         {@render setup_overview(setup, sport.slug)}
                     {/each}
@@ -232,12 +232,9 @@
                 </div>
 
                 <div class="ml-auto flex items-center gap-1">
-                    <Button class="ml-auto" size="icon" variant="ghost">
-                        <IconSettings class="size-4" />
-                    </Button>
-                    <Button size="sm">
-                        <IconEdit class="size-4" />
-                        <span>Edit gear</span>
+                    <Button size="sm" variant="outline">
+                        <IconPencil class="size-4" />
+                        <span>Edit setup</span>
                     </Button>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import type { Session, User } from '@supabase/supabase-js';
 import type { QueryClient } from '@tanstack/svelte-query';
+import type { ClassValue as ClsxClassValue } from 'clsx';
 
 import type { Client } from '$lib/database/types';
 
@@ -22,6 +23,10 @@ declare global {
   // interface PageState {}
   // interface Platform {}
   }
+}
+
+declare module 'tailwind-merge' {
+  export type ClassNameValue = ClsxClassValue;
 }
 
 export {};

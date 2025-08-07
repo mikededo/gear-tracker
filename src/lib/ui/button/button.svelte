@@ -4,6 +4,8 @@
 
     import type { WithElementRef } from '$lib/utils';
 
+    import { IconLoader2 } from '@tabler/icons-svelte';
+    import { slide } from 'svelte/transition';
     import { tv } from 'tailwind-variants';
 
     import { cn } from '$lib/utils';
@@ -40,6 +42,7 @@
     export type ButtonProps = {
         size?: ButtonSize;
         variant?: ButtonVariant;
+        loading?: boolean;
     } & WithElementRef<HTMLAnchorAttributes> & WithElementRef<HTMLButtonAttributes>;
 </script>
 
@@ -49,6 +52,7 @@
         class: className,
         disabled,
         href = undefined,
+        loading = false,
         ref = $bindable(null),
         size = 'default',
         type = 'button',
@@ -74,11 +78,16 @@
     <button
         class={cn(buttonVariants({ size, variant }), className)}
         bind:this={ref}
-        {disabled}
+        disabled={disabled || loading}
         {type}
         data-slot="button"
         {...restProps}
     >
+        {#if loading}
+            <div transition:slide={{ axis: 'x', duration: 150 }}>
+                <IconLoader2 class="animate-spin" />
+            </div>
+        {/if}
         {@render children?.()}
     </button>
 {/if}
